@@ -1,0 +1,46 @@
+body {
+  margin: 0;
+  background-color: #282c34;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: "Roboto", sans-serif;
+}
+
+.app {
+  text-align: center;
+}
+
+.title {
+  font-size: 32px;
+  line-height: 36px;
+  font-weight: 400;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 12px;
+}
+
+.input {
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: 8px;
+  border: 1px solid #3c3c3c;
+  color: #3c3c3c;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.input:focus {
+  outline: none;
+  box-shadow: inset 0 0 0 2px #7cb9e8;
+}
+
+.cards-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  margin-top: 20px;
+  padding-inline: 40px;
+  padding-bottom: 40px;
+}
