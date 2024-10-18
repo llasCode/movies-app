@@ -31,6 +31,7 @@ const Home = () => {
 
     if (results.Search) {
       setIsLoading(false);
+      setIsError(false);
       setSearchResults(results.Search);
     } else {
       setIsLoading(false);
