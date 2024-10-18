@@ -65,7 +65,7 @@ const Home = () => {
           className="favourites-movies-button"
           onClick={() => navigate("movies/favourites")}
         >
-          Favouties Movies
+          Favourite Movies
         </button>
       </div>
 

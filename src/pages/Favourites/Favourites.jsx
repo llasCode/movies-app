@@ -10,7 +10,7 @@ const Favourites = () => {
     <main className="app">
       <div className="wrapper">
         <GoBackHeader />
-        {!!localStorage.length && <Title title="Favourites movies" />}
+        {!!localStorage.length && <Title title="Favourite movies" />}
       </div>
 
       <>
