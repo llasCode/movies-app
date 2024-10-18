@@ -10,16 +10,6 @@ body {
   text-align: center;
 }
 
-.title {
-  font-size: 32px;
-  line-height: 36px;
-  font-weight: 400;
-  color: white;
-  font-family: "Poppins", sans-serif;
-  margin: 0;
-  padding: 12px;
-}
-
 .input {
   box-sizing: border-box;
   border-radius: 8px;
@@ -36,11 +26,54 @@ body {
   box-shadow: inset 0 0 0 2px #7cb9e8;
 }
 
-.cards-grid {
-  display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  margin-top: 20px;
-  padding-inline: 40px;
-  padding-bottom: 40px;
+.input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 10px;
+}
+
+@media (max-width: 850px) {
+  .input-container {
+    flex-direction: column;
+    row-gap: 10px;
+  }
+}
+
+.favourites-movies-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid #007bff;
+}
+
+.favourites-movies-button:hover {
+  background-color: #0056b3;
+  border: 1px solid #0056b3;
+}
+
+.loader-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.loader {
+  border: 8px solid #007bff;
+  border-top: 8px solid #3498db;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

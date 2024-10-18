@@ -1,12 +1,17 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import "./CardInfo.css";
+import GoBackHeader from "../../components/GoBackHeader";
+import CardSkeleton from "../../components/CardSkeleton";
+import Title from "../../components/Title";
 
 const CardInfo = () => {
   const { id } = useParams();
   const [cardData, setCardData] = useState({});
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
+  const [favouriteText, setFavouriteText] = useState("Add to Favourite");
+  const [isFavourite, setIsFavourite] = useState(!!localStorage.getItem(id));
+
   const movieAtributtes = [
     "Title",
     "Year",
@@ -20,10 +25,21 @@ const CardInfo = () => {
     "imdbRating",
   ];
 
+  const renderMovieAttributes = () => {
+    return Object.keys(cardData)
+      .filter((item) => movieAtributtes.includes(item))
+      .map((item, index) => (
+        <p key={index}>
+          <strong>{`${item}: `}</strong>
+          {cardData[item]}
+        </p>
+      ));
+  };
+
   useEffect(() => {
     const fetchCardData = async () => {
       try {
-        setLoading(true);
+        setIsLoading(true);
         const url = `https://www.omdbapi.com/?i=${id}&apikey=${process.env.REACT_APP_API_KEY}&plot=full`;
         const response = await fetch(url);
 
@@ -33,7 +49,7 @@ const CardInfo = () => {
 
         const data = await response.json();
         if (data) {
-          setLoading(false);
+          setIsLoading(false);
           setCardData(data);
         }
       } catch (error) {
@@ -44,56 +60,56 @@ const CardInfo = () => {
     fetchCardData();
   }, [id]);
 
+  useEffect(() => {
+    const button = document.querySelector(".favourite-button");
+    if (!button) return;
+
+    if (isFavourite) {
+      setFavouriteText("Remove from favourites");
+      button.classList.add("negative");
+    } else {
+      setFavouriteText("Add to favourites");
+    }
+  }, [cardData, isFavourite]);
+
+  const handleFavourite = () => {
+    if (isFavourite) {
+      localStorage.removeItem(id);
+      document.querySelector(".favourite-button").classList.remove("negative");
+      setIsFavourite(!isFavourite);
+    } else {
+      localStorage.setItem(
+        id,
+        JSON.stringify({ title: cardData.Title, poster: cardData.Poster, id })
+      );
+      setIsFavourite(!isFavourite);
+    }
+  };
+
   return (
-    <>
-      <main className="card-wrapper">
-        <div className="header-container">
-          <button className="back-button" onClick={() => navigate(-1)}>
-            Go Back
-          </button>
-        </div>
+    <main className="wrapper">
+      <GoBackHeader />
 
-        {loading && (
-          <div className="skeleton">
-            <div className="image-placeholder"></div>
-            <div className="text-placeholder-wrapper">
-              <div className="text-placeholder line"></div>
-              <div className="text-placeholder line"></div>
-              <div className="text-placeholder line"></div>
-              <div className="text-placeholder line"></div>
-              <div className="text-placeholder line"></div>
-              <div className="text-placeholder line"></div>
+      {isLoading && <CardSkeleton />}
+      {cardData && !isLoading && (
+        <>
+          <Title title={cardData.Title} />
+
+          <div className="content-container">
+            <div className="image-container">
+              <img src={cardData.Poster} alt={cardData.Title} />
             </div>
+
+            <div className="details-container">{renderMovieAttributes()}</div>
           </div>
-        )}
-        {cardData && !loading && (
-          <>
-            <h1 className="movie-title">{cardData.Title}</h1>
-
-            <div className="content-container">
-              <div className="image-container">
-                <img src={cardData.Poster} alt={cardData.Title} />
-              </div>
-
-              <div className="details-container">
-                {Object.keys(cardData).map((item, index) => {
-                  if (movieAtributtes.includes(item)) {
-                    return (
-                      <p key={index}>
-                        <strong>{`${item}: `}</strong>
-                        {cardData[item]}
-                      </p>
-                    );
-                  } else {
-                    return <></>;
-                  }
-                })}
-              </div>
-            </div>
-          </>
-        )}
-      </main>
-    </>
+          <div className="favourite-container">
+            <button className="favourite-button" onClick={handleFavourite}>
+              {favouriteText}
+            </button>
+          </div>
+        </>
+      )}
+    </main>
   );
 };
 

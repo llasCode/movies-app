@@ -8,7 +8,7 @@ const Card = ({ title, poster, id }) => {
       {poster && (
         <div
           className="card-container"
-          onClick={() => navigate(`movies/${id}`)}
+          onClick={() => navigate(`/movies/${id}`, { replace: true })}
         >
           <img className="card-img" src={poster} alt={title} />
           <p className="card-detail">{title}</p>

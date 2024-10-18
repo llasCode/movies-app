@@ -1,43 +1,10 @@
-.card-wrapper {
+.wrapper {
   display: flex;
   flex-direction: column;
   padding: 20px;
 }
 
-.header-container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-bottom: 20px;
-  column-gap: 8px;
-}
-
-.back-button {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  border: 1px solid #007bff;
-}
-
-.back-button:hover {
-  background-color: #0056b3;
-  border: 1px solid #0056b3;
-}
-
-.movie-title {
-  font-size: 32px;
-  line-height: 36px;
-  font-weight: 500;
-  font-family: "Poppins", sans-serif;
-  color: white;
-  padding: 0;
-  margin: 0;
-}
-
 .content-container {
-  margin-top: 4px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -90,68 +57,32 @@
   }
 }
 
-.skeleton {
+.favourite-container {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  width: 760px;
-  padding: 20px;
-  background-color: #e6e6fa;
-  border-radius: 8px;
-  text-align: left;
-  margin-top: 40px;
-  column-gap: 16px;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 20px;
 }
 
-.image-placeholder {
-  width: 250px;
-  height: 300px;
-  background-color: #e0e0e0;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  animation: shimmer 1.5s infinite;
-}
-
-.text-placeholder-wrapper {
-  display: flex;
-  flex-direction: column;
-  row-gap: 2px;
-  width: calc(100% - 250px);
-}
-
-.text-placeholder {
-  background-color: #e0e0e0;
+.favourite-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
   border-radius: 4px;
-  margin-bottom: 10px;
-  animation: shimmer 1.5s infinite;
+  cursor: pointer;
+  border: 1px solid #007bff;
 }
 
-.line {
-  height: 20px;
-  width: 70%;
+.favourite-button:hover {
+  background-color: #0056b3;
+  border: 1px solid #0056b3;
 }
 
-@keyframes shimmer {
-  0% {
-    background-color: #e0e0e0;
-  }
-  50% {
-    background-color: #d0d0d0;
-  }
-  100% {
-    background-color: #e0e0e0;
-  }
-}
-
-@media (max-width: 850px) {
-  .skeleton {
-    flex-direction: column;
-    align-items: center;
-    width: auto;
-  }
-
-  .text-placeholder-wrapper {
-    width: 100%;
-    align-items: center;
-  }
+.favourite-button.negative {
+  background-color: white;
+  color: #007bff;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid #007bff;
 }
